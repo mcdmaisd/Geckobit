@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ExchangeViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
