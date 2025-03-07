@@ -9,8 +9,10 @@ import Foundation
 
 struct Constant {
     //MARK: system Image
-    static let up = "arrowtriangle.up.fill"
-    static let down = "arrowtriangle.down.fill"
+    static let up = "arrowtriangle.up"
+    static let down = "arrowtriangle.down"
+    static let upFill = "arrowtriangle.up.fill"
+    static let downFill = "arrowtriangle.down.fill"
     static let search = "magnifyingglass"
     static let star = "star"
     static let starFill = "star.fill"
