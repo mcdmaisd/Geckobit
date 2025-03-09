@@ -7,23 +7,28 @@
 
 import Foundation
 import Alamofire
+import RxSwift
 
 final class APIManager {
     static let shared = APIManager()
     
     private init() { }
     
-    func requestAPI<T: Decodable, U: URLRequestConvertible>(_ router: U, _ completionHandler: @escaping (T) -> Void) {
-        print(router.urlRequest?.url)
-        AF.request(router).responseDecodable(of: T.self) { response in
-            switch response.result {
-            case .success(let value):
-                completionHandler(value)
-            case .failure(let error):
-                dump(error)
-//                guard let statusCode = response.response?.statusCode else { return }
-//                ErrorAlert.shared.statusCode = statusCode
+    func requestAPI<T: Decodable, U: URLRequestConvertible>(_ router: U) -> Observable<T> {
+        return Observable.create { observer in
+            let request = AF.request(router).responseDecodable(of: T.self) { response in
+                switch response.result {
+                case .success(let value):
+                    dump(value)
+                    observer.onNext(value)
+                    observer.onCompleted()
+                case .failure(let error):
+                    dump(error)
+                    observer.onError(error)
+                }
             }
+            
+            return Disposables.create { request.cancel() }
         }
     }
 }
