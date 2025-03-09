@@ -14,21 +14,34 @@ final class ExchangeViewModel {
     private let disposeBag = DisposeBag()
     private let coins = BehaviorRelay<[UpbitResponse]>(value: [])
     private let filteredCoins = PublishRelay<[UpbitResponse]>()
-    
+
     private var currentColumn: Column = .tradingVolume
     private var currentSort: Sort = .descending
     
     struct Input {
-        let columnTapped: Observable<Int>
+        let columnTapped: PublishRelay<Int>
     }
     
     struct Output {
         let coins: Driver<[UpbitResponse]>
         let column: PublishRelay<ColumnState>
+        let headers: Driver<[HeaderItem]>
     }
     
     func transform(input: Input) -> Output {
         let column = PublishRelay<ColumnState>()
+        let headers = BehaviorRelay<[HeaderItem]>(value: [])
+        var items: [HeaderItem] = []
+        
+        for (i, title) in C.columnTitle.enumerated() {
+            let isCoin = title == C.coin
+            let item = isCoin
+            ? HeaderItem(title: title, tag: i, isFilter: false)
+            : HeaderItem(title: title, tag: i, isFilter: true)
+            items.append(item)
+        }
+        
+        headers.accept(items)
         
         fetchCoins()
             .bind(to: coins)
@@ -41,7 +54,7 @@ final class ExchangeViewModel {
             }
             .bind(to: filteredCoins)
             .disposed(by: disposeBag)
-
+                
         input.columnTapped
             .bind(with: self) { owner, tag in
                 let selectedColumn = Column(rawValue: tag) ?? .none
@@ -65,9 +78,10 @@ final class ExchangeViewModel {
         
         return Output(
             coins: filteredCoins.asDriver(onErrorJustReturn: []),
-            column: column)
+            column: column,
+            headers: headers.asDriver(onErrorJustReturn: []))
     }
-    
+        
     private func updateSort() {
         switch currentSort {
         case .none:

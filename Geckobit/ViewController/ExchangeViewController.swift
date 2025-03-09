@@ -11,6 +11,7 @@ import RxSwift
 
 final class ExchangeViewController: BaseViewController {
     private let disposeBag = DisposeBag()
+    private let buttonTapped = PublishRelay<Int>()
     private let viewModel = ExchangeViewModel()
     private let headerView = ContainerView(backgroundColor: .customLightgray)
     private let tableView = UITableView()
@@ -18,6 +19,7 @@ final class ExchangeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBarAppearance()
+        setLeftTitleView(title: C.exchangeTitle, size: C.large)
         initTableView()
         bind()
     }
@@ -40,40 +42,41 @@ final class ExchangeViewController: BaseViewController {
         }
     }
     
-    override func configureView() {
-        configureHeaderView()
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: TitleView(title: C.exchangeTitle))
-    }
-    
     private func initTableView() {
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
         tableView.register(CoinTableViewCell.self, forCellReuseIdentifier: CoinTableViewCell.id)
     }
     
-    private func configureHeaderView() {
-        for (i, title) in C.columnTitle.enumerated() {
-            let column = FilterView()
-            
-            if title == C.coin {
-                column.configureData(title: title, tag: i, true)
-            } else {
-                column.configureData(title: title, tag: i)
-            }
-            
-            headerView.addArrangedSubview(column)
-        }
-    }
-    
     private func bind() {
-        let columnTapped = Observable.merge(
-            headerView.arrangedSubviews
-                .compactMap { $0 as? FilterView }
-                .map { view in
-                    view.button.rx.tap.map { view.button.tag }
-                })
-        let input = ExchangeViewModel.Input(columnTapped: columnTapped)
+        let input = ExchangeViewModel.Input(columnTapped: buttonTapped)
         let output = viewModel.transform(input: input)
+        
+        output.headers
+            .drive(with: self, onNext: { owner, items in
+                for item in items {
+                    let column = FilterView()
+                    
+                    if item.isFilter {
+                        column.configureData(title: item.title, tag: item.tag)
+                    } else {
+                        column.configureData(title: item.title, tag: item.tag, isNotFilter: true)
+                    }
+                    
+                    owner.headerView.addArrangedSubview(column)
+                }
+                
+                Observable.merge(
+                    owner.headerView.arrangedSubviews
+                        .compactMap { $0 as? FilterView }
+                        .map { view in
+                            view.button.rx.tap.map { view.button.tag }
+                        }
+                )
+                .bind(to: owner.buttonTapped)
+                .disposed(by: owner.disposeBag)
+            })
+            .disposed(by: disposeBag)
         
         output.column
             .observe(on: MainScheduler.instance)
@@ -92,8 +95,8 @@ final class ExchangeViewController: BaseViewController {
                 cellType: CoinTableViewCell.self)) { row, coin, cell in
                     cell.selectionStyle = .none
                     cell.configureData(coin)
-            }
-            .disposed(by: disposeBag)
+                }
+                .disposed(by: disposeBag)
     }
 }
 
