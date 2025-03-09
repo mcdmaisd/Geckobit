@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import Kingfisher
-import SnapKit
 
 class BaseCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {

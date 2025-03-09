@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import Kingfisher
-import SnapKit
 
 class BaseTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
