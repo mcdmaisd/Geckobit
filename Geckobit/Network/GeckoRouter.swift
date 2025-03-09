@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 
 enum GeckoRouter: URLRequestConvertible {
-    case market
+    case market(ids: String)
     case trending
     case search(keyword: String)
     
@@ -37,8 +37,8 @@ enum GeckoRouter: URLRequestConvertible {
     
     private var parameter: Parameters? {
         switch self {
-        case .market:
-            return [AC.geckoCurrency: AC.currencyValue]
+        case .market(let ids):
+            return [AC.geckoCurrency: AC.currencyValue, AC.ids: ids, AC.sparkline: AC.sparklineValue]
         case .trending:
             return nil
         case .search(let keyword):

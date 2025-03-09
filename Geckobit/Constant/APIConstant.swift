@@ -16,6 +16,9 @@ struct APIConstant {
     //MARK: Gecko params
     static let geckoCurrency = "vs_currency"
     static let geckoSearch = "query"
+    static let ids = "ids"
+    static let sparkline = "sparkline"
+    static let sparklineValue = "true"
     //MARK: common value
     static let currencyValue = "KRW"
     //MARK: path
