@@ -70,5 +70,8 @@ struct Constant {
     static let popupTitle = "안내"
     static let popupDetail = "네트워크 연결이 일시적으로 원활하지 않습니다. 데이터 또는 Wi-Fi 연결 상태를 확인해주세요."
     static let popupButtonTtile = "다시 시도하기"
-    
+    //MARK: BookMark Message
+    static let BookMarkMessage = [true: "이 즐겨찾기되었습니다.", false: "이 즐겨찾기에서 제거되었습니다."]
+    static let noData = "준비 중입니다"
+
 }

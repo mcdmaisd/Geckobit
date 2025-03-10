@@ -67,12 +67,13 @@ final class CoinProfileViewWithRank: BaseView {
         title.titleLabel(text: data.symbol, fontSize: 14)
         subtitle.subtitleLabel(text: data.name, fontSize: C.medium)
         rank.configureRank(data.market_cap_rank)
-        bookmark.configureButton(false)
+        bookmark.configureButton(data.id)
     }
     
     func reset() {
         thumbnail.image = nil
         rank.reset()
+        bookmark.reset()
         [title, subtitle].forEach { $0.text = nil }
     }
 }
