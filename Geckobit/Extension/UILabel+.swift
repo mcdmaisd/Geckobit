@@ -40,26 +40,20 @@ extension UILabel {
         let textColor: UIColor = data >= 0 ? .customRed : .customBlue
         let percentValue = isRate ? data * 100 : data
         let roundedValue = (percentValue * 100).rounded() / 100
+        
         let formatter = UILabel.decimalFormatter
-
         formatter.maximumFractionDigits = 2
         formatter.minimumFractionDigits = 2
 
         let formattedValue = formatter.string(from: NSNumber(value: abs(roundedValue))) ?? "0.00"
-        
         let signPrefix = (roundedValue != 0 && data < 0) ? "-" : ""
         let suffix = isRate ? "%" : ""
         let result = signPrefix + formattedValue + suffix
-
-        if formattedValue != "0" && formattedValue != "0.00" {
-            self.textColor = textColor
-        } else {
-            self.textColor = .black
-        }
+        let isNotZero = formattedValue != "0" && formattedValue != "0.00"
         
+        self.textColor = isNotZero ? textColor : .black
         self.text = result
     }
-
     func formatVolume(_ data: Double) {
         if data >= C.million {
             let millionValue = Int(data / C.million)
@@ -68,5 +62,19 @@ extension UILabel {
             let value = Int(data)
             self.text = value.formatted()
         }
+    }
+    
+    func titleLabel(text: String, fontSize: CGFloat, _ isCenter: Bool = false) {
+        self.text = text
+        self.textColor = .customNavy
+        self.font = .systemFont(ofSize: fontSize, weight: .bold)
+        self.textAlignment = isCenter ? .center : .left
+    }
+    
+    func subtitleLabel(text: String, fontSize: CGFloat, _ isCenter: Bool = false) {
+        self.text = text
+        self.textColor = .customGray
+        self.font = .systemFont(ofSize: fontSize, weight: .regular)
+        self.textAlignment = isCenter ? .center : .left
     }
 }

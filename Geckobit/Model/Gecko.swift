@@ -77,11 +77,11 @@ struct PriceChangePercentage: Decodable {
 struct NFTItem: Decodable {
     let name: String
     let thumb: String
+    let floor_price_24h_percentage_change: Double
     let data: NFTData
 }
 
 struct NFTData: Decodable {
     let floor_price: String
-    let floor_price_in_usd_24h_percentage_change: String
 }
 

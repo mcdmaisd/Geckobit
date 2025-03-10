@@ -16,4 +16,21 @@ extension UIViewController {
         navigationController?.navigationBar.standardAppearance = navigationBarAppearance
         navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
     }
+    
+    func setLeftTitleView(title: String, size: CGFloat) {
+        let titleView = TitleView(title: title, size: size)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: titleView)
+    }
+    
+    func configureLeftBarButtonItem(view: UIView) {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: view)
+    }
+    
+    func configureRightBarButtonItem(view: UIView) {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: view)
+    }
+    
+    func configureTitleView(view: UIView) {
+        navigationItem.titleView = view
+    }
 }

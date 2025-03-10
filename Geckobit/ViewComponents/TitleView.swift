@@ -8,10 +8,10 @@
 import UIKit
 
 class TitleView: UILabel {
-    init(title: String) {
+    init(title: String, size: CGFloat) {
         super.init(frame: .zero)
         self.text = title
-        self.font = .boldSystemFont(ofSize: 20)
+        self.font = .boldSystemFont(ofSize: size)
         self.textColor = .customNavy
         self.sizeToFit()
     }

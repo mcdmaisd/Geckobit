@@ -22,11 +22,12 @@ func presentToast(_ message: String) {
 
 func presentLoading() {
     let window = UIApplication.shared.getCurrentScene()
+    window.isUserInteractionEnabled = false
     window.makeToastActivity(.center)
 }
 
 func hideLoading() {
     let window = UIApplication.shared.getCurrentScene()
-    
+    window.isUserInteractionEnabled = true
     window.hideToastActivity()
 }

@@ -19,11 +19,9 @@ final class APIManager {
             let request = AF.request(router).responseDecodable(of: T.self) { response in
                 switch response.result {
                 case .success(let value):
-                    dump(value)
                     observer.onNext(value)
                     observer.onCompleted()
                 case .failure(let error):
-                    dump(error)
                     observer.onError(error)
                 }
             }

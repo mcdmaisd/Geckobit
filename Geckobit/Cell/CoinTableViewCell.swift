@@ -34,7 +34,6 @@ final class CoinTableViewCell: BaseTableViewCell {
     
     override func configureView() {
         changeContainerView.axis = .vertical
-        changeContainerView.spacing = 0
         changeContainerView.distribution = .fillProportionally
         
         coinName.font = .systemFont(ofSize: C.medium, weight: .bold)

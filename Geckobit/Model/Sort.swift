@@ -24,3 +24,9 @@ struct ColumnState {
     let column: Column
     let sort: Sort
 }
+
+struct HeaderItem {
+    let title: String
+    let tag: Int
+    let isFilter: Bool
+}

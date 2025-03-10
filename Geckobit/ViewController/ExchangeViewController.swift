@@ -43,7 +43,6 @@ final class ExchangeViewController: BaseViewController {
     }
     
     private func initTableView() {
-        tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
         tableView.register(CoinTableViewCell.self, forCellReuseIdentifier: CoinTableViewCell.id)
     }

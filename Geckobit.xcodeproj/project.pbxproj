@@ -16,6 +16,8 @@
 		4F57579B2D7988180039F6D6 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 4F57579A2D7988180039F6D6 /* RxCocoa */; };
 		4F57579D2D7988180039F6D6 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4F57579C2D7988180039F6D6 /* RxSwift */; };
 		4F57579E2D7988260039F6D6 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 4F57578B2D79879F0039F6D6 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		4F575A292D7E68A60039F6D6 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 4F575A282D7E68A60039F6D6 /* .gitignore */; };
+		4F575A922D7F66620039F6D6 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = 4F575A912D7F66620039F6D6 /* Tabman */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,6 +36,7 @@
 
 /* Begin PBXFileReference section */
 		4F5756BF2D7975490039F6D6 /* Geckobit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Geckobit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F575A282D7E68A60039F6D6 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -67,6 +70,7 @@
 				4F57578C2D79879F0039F6D6 /* RealmSwift in Frameworks */,
 				4F57579B2D7988180039F6D6 /* RxCocoa in Frameworks */,
 				4F5757892D7987730039F6D6 /* SnapKit in Frameworks */,
+				4F575A922D7F66620039F6D6 /* Tabman in Frameworks */,
 				4F5757982D7988000039F6D6 /* DGCharts in Frameworks */,
 				4F57579D2D7988180039F6D6 /* RxSwift in Frameworks */,
 				4F5757952D7987D10039F6D6 /* Kingfisher in Frameworks */,
@@ -79,6 +83,7 @@
 		4F5756B62D7975490039F6D6 = {
 			isa = PBXGroup;
 			children = (
+				4F575A282D7E68A60039F6D6 /* .gitignore */,
 				4F5756C12D7975490039F6D6 /* Geckobit */,
 				4F5756C02D7975490039F6D6 /* Products */,
 			);
@@ -121,6 +126,7 @@
 				4F5757972D7988000039F6D6 /* DGCharts */,
 				4F57579A2D7988180039F6D6 /* RxCocoa */,
 				4F57579C2D7988180039F6D6 /* RxSwift */,
+				4F575A912D7F66620039F6D6 /* Tabman */,
 			);
 			productName = Geckobit;
 			productReference = 4F5756BF2D7975490039F6D6 /* Geckobit.app */;
@@ -158,6 +164,7 @@
 				4F5757932D7987D10039F6D6 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				4F5757962D7988000039F6D6 /* XCRemoteSwiftPackageReference "Charts" */,
 				4F5757992D7988180039F6D6 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				4F575A902D7F66620039F6D6 /* XCRemoteSwiftPackageReference "Tabman" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 4F5756C02D7975490039F6D6 /* Products */;
@@ -174,6 +181,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F575A292D7E68A60039F6D6 /* .gitignore in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,7 +212,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -237,7 +245,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -455,6 +463,14 @@
 				minimumVersion = 6.9.0;
 			};
 		};
+		4F575A902D7F66620039F6D6 /* XCRemoteSwiftPackageReference "Tabman" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/uias/Tabman.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -497,6 +513,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4F5757992D7988180039F6D6 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
+		};
+		4F575A912D7F66620039F6D6 /* Tabman */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4F575A902D7F66620039F6D6 /* XCRemoteSwiftPackageReference "Tabman" */;
+			productName = Tabman;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

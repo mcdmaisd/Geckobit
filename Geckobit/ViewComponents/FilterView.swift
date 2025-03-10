@@ -60,7 +60,7 @@ final class FilterView: BaseView {
         }
     }
 
-    func configureData(title: String, tag: Int, _ isNotFilter: Bool = false) {
+    func configureData(title: String, tag: Int, isNotFilter: Bool = false) {
         button.setTitle(title, for: .normal)
         button.tag = tag
         
