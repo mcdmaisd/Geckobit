@@ -26,7 +26,7 @@ final class CoinInfoViewModel {
         let trending = fetchTrending().publish()
         
         trending
-            .map { $0.coins.map { $0.item } }
+            .map { Array($0.coins.map { $0.item }.prefix(14)) }
             .bind(to: coin)
             .disposed(by: disposeBag)
         

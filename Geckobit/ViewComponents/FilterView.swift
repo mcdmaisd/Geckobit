@@ -29,7 +29,7 @@ final class FilterView: BaseView {
         
         arrowContainer.snp.makeConstraints { make in
             make.centerY.trailing.equalToSuperview()
-            make.height.equalTo(button).dividedBy(2)
+            make.height.equalTo(20)
         }
     }
     

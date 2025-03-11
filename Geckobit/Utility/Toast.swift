@@ -17,7 +17,8 @@ func presentToast(_ message: String) {
     let window = UIApplication.shared.getCurrentScene()
     let center = CGPoint(x: window.bounds.midX, y: window.bounds.midY)
     
-    window.makeToast(message, duration: 1, point: center, title: nil, image: nil, style: style, completion: nil)
+    window.hideToast()
+    window.makeToast(message, duration: 0.5, point: center, title: nil, image: nil, style: style, completion: nil)
 }
 
 func presentLoading() {

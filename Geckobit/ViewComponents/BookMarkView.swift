@@ -13,7 +13,7 @@ final class BookMarkView: BaseView {
     private let disposeBag = DisposeBag()
     private let viewModel = BookMarkViewModel()
     private let initialStatus = PublishRelay<String>()
-    private(set) var button = UIButton()
+    private let button = UIButton()
         
     override func configureHierarchy() {
         addView(button)

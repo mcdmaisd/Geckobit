@@ -33,7 +33,7 @@ final class ExchangeViewController: BaseViewController {
         headerView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.horizontalEdges.equalToSuperview()
-            make.height.equalTo(40)
+            make.height.equalTo(30)
         }
         
         tableView.snp.makeConstraints { make in

@@ -93,12 +93,12 @@ final class CoinInfoViewController: BaseViewController {
     
     override func configureLayout() {
         searchbar.snp.makeConstraints { make in
-            make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
+            make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.height.equalTo(40)
         }
         
         trendCoinlabel.snp.makeConstraints { make in
-            make.top.equalTo(searchbar.snp.bottom).offset(10)
+            make.top.equalTo(searchbar.snp.bottom).offset(30)
             make.leading.equalTo(searchbar)
         }
         
@@ -106,11 +106,11 @@ final class CoinInfoViewController: BaseViewController {
             make.centerY.equalTo(trendCoinlabel)
             make.trailing.equalTo(searchbar)
         }
-        
+
         coinCollectionView.snp.makeConstraints { make in
             make.top.equalTo(trendCoinlabel.snp.bottom)
             make.horizontalEdges.equalToSuperview()
-            make.height.equalTo(302)
+            make.height.equalTo(UIApplication.shared.getCurrentScene().bounds.height * 0.43)
         }
         
         trendNFTLabel.snp.makeConstraints { make in
@@ -120,22 +120,23 @@ final class CoinInfoViewController: BaseViewController {
         
         nftCollectionView.snp.makeConstraints { make in
             make.top.equalTo(trendNFTLabel.snp.bottom)
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalTo(150)
+            make.horizontalEdges.equalToSuperview()
+            make.height.equalTo(130)
         }
     }
     
     override func configureView() {
         trendCoinlabel.titleLabel(text: C.trendCoin, fontSize: C.regular)
         trendNFTLabel.titleLabel(text: C.trendNFT, fontSize: C.regular)
+        nftCollectionView.showsHorizontalScrollIndicator = false
     }
 }
 
 extension CoinInfoViewController {
     private func trendCoinFlowLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
-        let verticalInset: CGFloat = 15
-        let horizontalInset: CGFloat = 10
+        let verticalInset: CGFloat = 10
+        let horizontalInset: CGFloat = 20
         let interitemSpacing: CGFloat = 10
         let numberOfItemsInRow: CGFloat = 2
         let itemHeight: CGFloat = 26
@@ -154,8 +155,8 @@ extension CoinInfoViewController {
     
     private func trendNFTFlowLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
-        let inset: CGFloat = 10
-        let itemWidth: CGFloat = 75
+        let inset: CGFloat = 20
+        let itemWidth: CGFloat = 72
         let itemHeight: CGFloat = 110
         
         layout.scrollDirection = .horizontal

@@ -48,13 +48,9 @@ final class CoinProfileView: BaseView {
     
     override func configureView() {
         [title, subtitle].forEach { $0.lineBreakMode = .byTruncatingTail }
+        thumbnail.layer.cornerRadius = 13
     }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        thumbnail.layer.cornerRadius = thumbnail.frame.width / 2
-    }
-    
+        
     func configureProfile(_ data: CoinItemDetail) {
         thumbnail.configureImage(data.thumb)
         title.titleLabel(text: data.symbol, fontSize: C.medium)

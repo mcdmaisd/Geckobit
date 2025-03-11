@@ -34,17 +34,19 @@ final class CoinProfileViewWithRank: BaseView {
         
         title.snp.makeConstraints { make in
             make.top.equalTo(thumbnail)
-            make.leading.equalTo(thumbnail.snp.trailing).offset(5)
+            make.leading.equalTo(thumbnail.snp.trailing).offset(10)
         }
         
         subtitle.snp.makeConstraints { make in
-            make.top.equalTo(title.snp.bottom)
+            make.top.equalTo(rank.snp.bottom)
             make.leading.equalTo(title)
+            make.trailing.equalTo(bookmark.snp.leading)
         }
 
         rank.snp.makeConstraints { make in
             make.leading.equalTo(title.snp.trailing).offset(5)
             make.centerY.equalTo(title)
+            make.trailing.lessThanOrEqualTo(bookmark.snp.leading).offset(-10)
         }
         
         bookmark.snp.makeConstraints { make in
@@ -55,19 +57,16 @@ final class CoinProfileViewWithRank: BaseView {
     
     override func configureView() {
         [title, subtitle].forEach { $0.lineBreakMode = .byTruncatingTail }
+        rank.setContentCompressionResistancePriority(.required, for: .horizontal)
+        thumbnail.layer.cornerRadius = 18
     }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        thumbnail.layer.cornerRadius = thumbnail.frame.width / 2
-    }
-    
+        
     func configureProfile(_ data: SearchResult) {
         thumbnail.configureImage(data.large)
         title.titleLabel(text: data.symbol, fontSize: 14)
         subtitle.subtitleLabel(text: data.name, fontSize: C.medium)
         rank.configureRank(data.market_cap_rank)
-        bookmark.configureButton(data.id)
+        bookmark.configureButton(data.name)
     }
     
     func reset() {
