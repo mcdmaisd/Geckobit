@@ -14,7 +14,7 @@ final class BookMarkView: BaseView {
     private let viewModel = BookMarkViewModel()
     private let initialStatus = PublishRelay<String>()
     private let button = UIButton()
-        
+    
     override func configureHierarchy() {
         addView(button)
     }
@@ -39,14 +39,13 @@ final class BookMarkView: BaseView {
             .drive(button.rx.isSelected)
             .disposed(by: disposeBag)
     }
-  
+        
     func configureButton(_ id: String) {
         initialStatus.accept(id)
-        
         var config = UIButton.Configuration.filled()
         config.baseBackgroundColor = .clear
         config.baseForegroundColor = .customNavy
-
+        
         button.configuration = config
         button.configurationUpdateHandler = { btn in
             switch btn.state {

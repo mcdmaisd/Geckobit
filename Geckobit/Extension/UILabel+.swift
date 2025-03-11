@@ -77,4 +77,12 @@ extension UILabel {
         self.font = .systemFont(ofSize: fontSize, weight: .regular)
         self.textAlignment = isCenter ? .center : .left
     }
+    
+    func wonLabel(data: Double, isBig: Bool = false) {
+        let roundedValue = (data * 100).rounded() / 100
+        self.text = "₩\(roundedValue.formatted())"
+        self.textColor = .customNavy
+        self.font = .systemFont(ofSize: isBig ? C.large : C.medium, weight: .bold)
+        self.textAlignment = .left
+    }
 }

@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import RxSwift
 
 final class SearchResultCollectionViewCell: BaseCollectionViewCell {
     private let coinView = CoinProfileViewWithRank()
+    var disposeBag = DisposeBag()
     
     override func configureHierarchy() {
         addSubview(coinView)
@@ -22,6 +24,7 @@ final class SearchResultCollectionViewCell: BaseCollectionViewCell {
         
     override func prepareForReuse() {
         super.prepareForReuse()
+        disposeBag = DisposeBag()
         coinView.reset()
     }
         

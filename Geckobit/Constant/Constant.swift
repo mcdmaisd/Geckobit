@@ -73,5 +73,7 @@ struct Constant {
     //MARK: BookMark Message
     static let BookMarkMessage = [true: "이 즐겨찾기되었습니다.", false: "이 즐겨찾기에서 제거되었습니다."]
     static let noData = "준비 중입니다"
+    //MARK: Alert Message
+    static let tooManyRequests = "네트워크 요청이 너무 자주 요청 되었습니다.\n나중에 다시 시도해 주세요"
 
 }

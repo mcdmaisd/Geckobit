@@ -4,7 +4,6 @@
 //
 //  Created by ilim on 2025-03-06.
 //
-
 import Foundation
 import Alamofire
 import RxSwift
@@ -16,7 +15,11 @@ final class APIManager {
     
     func requestAPI<T: Decodable, U: URLRequestConvertible>(_ router: U) -> Observable<T> {
         return Observable.create { observer in
+            DispatchQueue.main.async { presentLoading() }
+            
             let request = AF.request(router).responseDecodable(of: T.self) { response in
+                DispatchQueue.main.async { hideLoading() }
+                
                 switch response.result {
                 case .success(let value):
                     observer.onNext(value)

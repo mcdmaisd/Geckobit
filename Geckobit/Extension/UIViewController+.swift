@@ -33,4 +33,16 @@ extension UIViewController {
     func configureTitleView(view: UIView) {
         navigationItem.titleView = view
     }
+    
+    func popAlert(message: String) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
+        }
+        
+        alert.addAction(okAction)
+        present(alert, animated: true)
+    }
+
 }

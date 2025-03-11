@@ -20,7 +20,7 @@ final class TrendCoinCell: BaseCollectionViewCell {
         }
     }
         
-    func configureData(_ data: CoinItemDetail) {
-        coinView.configureProfile(data)
+    func configureData(_ data: CoinItemDetail, _ row: Int) {
+        coinView.configureProfile(data, row)
     }
 }

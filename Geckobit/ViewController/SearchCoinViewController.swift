@@ -19,7 +19,7 @@ final class SearchCoinViewController: BaseViewController {
         super.viewDidLoad()
         bind()
     }
-    
+        
     override func configureHierarchy() {
         addSubView(collectionView)
     }
@@ -48,12 +48,21 @@ final class SearchCoinViewController: BaseViewController {
                 cellIdentifier: SearchResultCollectionViewCell.id,
                 cellType: SearchResultCollectionViewCell.self)) { row, item, cell in
                     cell.configureData(item)
+                    
                 }
                 .disposed(by: disposeBag)
         
         output.scrollToTop
             .drive(with: self, onNext: { owner, result in
                 if result { owner.collectionView.scrollToItem(at: IndexPath(row: -1, section: 0), at: .top, animated: false)}
+            })
+            .disposed(by: disposeBag)
+        
+        collectionView.rx.modelSelected(SearchResult.self)
+            .bind(with: self, onNext: { owner, model in
+                let vc = CoinDetailViewController()
+                vc.id.accept(model.id)
+                owner.navigationController?.pushViewController(vc, animated: true)
             })
             .disposed(by: disposeBag)
     }

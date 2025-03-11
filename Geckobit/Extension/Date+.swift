@@ -15,15 +15,15 @@ extension Date {
         return formatter.string(from: self)
     }
     
-    func iso8601ToString(data: String) -> String {
+    func iso8601ToString(data: String, format: String) -> String {
         let isoformatter = ISO8601DateFormatter()
-        isoformatter.formatOptions = [.withInternetDateTime]
-        
+        isoformatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+
         guard let date = isoformatter.date(from: data) else { return C.failureMessage }
         
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: C.locale)
-        formatter.dateFormat = C.alltimeFormat
+        formatter.dateFormat = format
         
         return formatter.string(from: date)
     }

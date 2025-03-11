@@ -41,8 +41,16 @@ final class CoinInfoViewController: BaseViewController {
             .drive(coinCollectionView.rx.items(
                 cellIdentifier: TrendCoinCell.id,
                 cellType: TrendCoinCell.self)) { row, item, cell in
-                    cell.configureData(item)
+                    cell.configureData(item, row)
             }
+            .disposed(by: disposeBag)
+        
+        coinCollectionView.rx.modelSelected(CoinItemDetail.self)
+            .bind(with: self, onNext: { owner, model in
+                let vc = CoinDetailViewController()
+                vc.id.accept(model.id)
+                owner.navigationController?.pushViewController(vc, animated: true)
+            })
             .disposed(by: disposeBag)
         
         output.trendNFTs
@@ -136,8 +144,8 @@ extension CoinInfoViewController {
     private func trendCoinFlowLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         let verticalInset: CGFloat = 10
-        let horizontalInset: CGFloat = 20
-        let interitemSpacing: CGFloat = 10
+        let horizontalInset: CGFloat = 10
+        let interitemSpacing: CGFloat = 5
         let numberOfItemsInRow: CGFloat = 2
         let itemHeight: CGFloat = 26
         let screenWidth = UIApplication.shared.getCurrentScene().bounds.width
