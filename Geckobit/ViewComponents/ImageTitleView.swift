@@ -36,6 +36,6 @@ final class ImageTitleView: BaseView {
     
     func configureData(_ url: String, _ symbol: String) {
         thumbnailView.configureImage(url)
-        symbolView.titleLabel(text: symbol, fontSize: C.regular)
+        symbolView.titleLabel(text: symbol.uppercased(), fontSize: C.regular)
     }
 }
