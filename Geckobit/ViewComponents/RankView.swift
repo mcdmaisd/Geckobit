@@ -28,11 +28,17 @@ final class RankView: BaseView {
         label.font = .systemFont(ofSize: C.small, weight: .bold)
     }
     
-    func configureRank(_ data: Int) {
+    func configureRank(_ data: Int?) {
+        guard let data else {
+            label.text = nil
+            self.backgroundColor = .clear
+            return
+        }
         label.text = "#\(data)"
     }
     
     func reset() {
         label.text = nil
+        self.backgroundColor = .customLightgray
     }
 }
