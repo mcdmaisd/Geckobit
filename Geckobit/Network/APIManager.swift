@@ -13,12 +13,16 @@ final class APIManager {
     
     private init() { }
     
-    func requestAPI<T: Decodable, U: URLRequestConvertible>(_ router: U) -> Observable<T> {
+    func requestAPI<T: Decodable, U: URLRequestConvertible>(_ router: U, showLoading: Bool = true) -> Observable<T> {
         return Observable.create { observer in
-            DispatchQueue.main.async { presentLoading() }
+            if showLoading {
+                DispatchQueue.main.async { presentLoading() }
+            }
             
             let request = AF.request(router).responseDecodable(of: T.self) { response in
-                DispatchQueue.main.async { hideLoading() }
+                if showLoading {
+                    DispatchQueue.main.async { hideLoading() }
+                }
                 
                 switch response.result {
                 case .success(let value):

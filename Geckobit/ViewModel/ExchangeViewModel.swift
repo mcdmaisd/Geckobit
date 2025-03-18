@@ -98,10 +98,13 @@ final class ExchangeViewModel {
         
         return Observable<Int>.interval(.seconds(C.exchangeInterval), scheduler: MainScheduler.instance)
             .startWith(0)
-            .flatMapLatest { _ in
-                return APIManager.shared.requestAPI(request)
+            .enumerated()
+            .flatMapLatest { index, _ -> Observable<[UpbitResponse]> in
+                let showLoading = index == 0
+                return APIManager.shared.requestAPI(request, showLoading: showLoading)
             }
     }
+
     
     private func sortCoins(_ response: [UpbitResponse]) -> [UpbitResponse] {
         if currentSort == .none {
