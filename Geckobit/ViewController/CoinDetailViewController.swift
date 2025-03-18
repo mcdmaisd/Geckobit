@@ -173,6 +173,8 @@ extension CoinDetailViewController {
         chartView.noDataFont = .systemFont(ofSize: 20)
         chartView.noDataTextColor = .lightGray
         
+        chartView.isUserInteractionEnabled = false
+        
         chartView.xAxis.drawGridLinesEnabled = false
         chartView.leftAxis.drawGridLinesEnabled = false
         chartView.rightAxis.drawGridLinesEnabled = false
