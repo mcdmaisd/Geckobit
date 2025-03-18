@@ -45,7 +45,8 @@ final class BookMarkView: BaseView {
         var config = UIButton.Configuration.filled()
         config.baseBackgroundColor = .clear
         config.baseForegroundColor = .customNavy
-        
+        config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+
         button.configuration = config
         button.configurationUpdateHandler = { btn in
             switch btn.state {
