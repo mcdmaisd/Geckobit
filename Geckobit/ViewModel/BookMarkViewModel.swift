@@ -35,18 +35,19 @@ final class BookMarkViewModel {
         
         input.likeButtonTapped
             .bind(with: self) { owner, isButtonSelected in
+                let newStatus = !isButtonSelected
+                
                 if isButtonSelected {
                     RealmRepository.shared.remove(id: owner.coinId)
-                    isSelected.accept(false)
-                    owner.sendMessage(false)
                 } else {
                     RealmRepository.shared.add(id: owner.coinId)
-                    isSelected.accept(true)
-                    owner.sendMessage(true)
                 }
+                
+                isSelected.accept(newStatus)
+                owner.sendMessage(newStatus)
             }
             .disposed(by: disposeBag)
-        
+
         return Output(isSelected: isSelected.asDriver(onErrorJustReturn: false))
     }
     
