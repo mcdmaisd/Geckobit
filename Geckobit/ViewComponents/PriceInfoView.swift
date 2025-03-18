@@ -42,6 +42,7 @@ final class PriceInfoView: BaseView {
             make.edges.equalToSuperview()
         }
         
+        // 왼쪽 레이블들
         highPriceTitle.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(16)
             make.leading.equalToSuperview().offset(16)
@@ -50,16 +51,6 @@ final class PriceInfoView: BaseView {
         highPriceValue.snp.makeConstraints { make in
             make.top.equalTo(highPriceTitle.snp.bottom).offset(4)
             make.leading.equalToSuperview().offset(16)
-        }
-        
-        lowPriceTitle.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-        }
-        
-        lowPriceValue.snp.makeConstraints { make in
-            make.top.equalTo(lowPriceTitle.snp.bottom).offset(4)
-            make.trailing.equalToSuperview().offset(-16)
         }
         
         allTimeHighTitle.snp.makeConstraints { make in
@@ -78,32 +69,51 @@ final class PriceInfoView: BaseView {
             make.bottom.equalToSuperview().offset(-16)
         }
         
+        // 오른쪽 레이블들 - 컨테이너 중앙 X좌표에 맞춤
+        lowPriceTitle.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(16)
+            make.leading.equalTo(containerView.snp.centerX).offset(16)
+        }
+        
+        lowPriceValue.snp.makeConstraints { make in
+            make.top.equalTo(lowPriceTitle.snp.bottom).offset(4)
+            make.leading.equalTo(containerView.snp.centerX).offset(16)
+        }
+        
         allTimeLowTitle.snp.makeConstraints { make in
             make.top.equalTo(lowPriceValue.snp.bottom).offset(24)
-            make.trailing.equalToSuperview().offset(-16)
+            make.leading.equalTo(containerView.snp.centerX).offset(16)
         }
         
         allTimeLowValue.snp.makeConstraints { make in
             make.top.equalTo(allTimeLowTitle.snp.bottom).offset(4)
-            make.trailing.equalToSuperview().offset(-16)
+            make.leading.equalTo(containerView.snp.centerX).offset(16)
         }
         
         allTimeLowDate.snp.makeConstraints { make in
             make.top.equalTo(allTimeLowValue.snp.bottom).offset(4)
-            make.trailing.equalToSuperview().offset(-16)
+            make.leading.equalTo(containerView.snp.centerX).offset(16)
         }
     }
-    
+
     override func configureView() {
         containerView.backgroundColor = .customLightgray
         containerView.layer.cornerRadius = 16
         
-        highPriceTitle.subtitleLabel(text: "24시간 고가", fontSize: 14)
-        lowPriceTitle.subtitleLabel(text: "24시간 저가", fontSize: 14)
-        
-        allTimeHighTitle.subtitleLabel(text: "역대 최고가", fontSize: 14)
-        allTimeLowTitle.subtitleLabel(text: "역대 최저가", fontSize: 14)
+        [highPriceValue, lowPriceTitle, lowPriceValue, allTimeHighTitle,
+         allTimeHighValue, allTimeHighDate, allTimeLowTitle, allTimeLowValue,
+         allTimeLowDate].forEach { $0.textAlignment = .left }
+
+        let titleLabels = [highPriceTitle, lowPriceTitle, allTimeHighTitle, allTimeLowTitle]
+        let titleTexts = ["24시간 고가", "24시간 저가", "역대 최고가", "역대 최저가"]
+        let fontSize: CGFloat = 14
+
+        // 제목 레이블 설정
+        for (index, label) in titleLabels.enumerated() {
+            label.subtitleLabel(text: titleTexts[index], fontSize: fontSize)
+        }
     }
+
     
     func configure(high24h: Double, low24h: Double, ath: Double, athDate: String, atl: Double, atlDate: String) {
         highPriceValue.wonLabel(data: high24h)
