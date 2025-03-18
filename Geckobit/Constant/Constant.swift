@@ -75,5 +75,6 @@ struct Constant {
     static let noData = "준비 중입니다"
     //MARK: Alert Message
     static let tooManyRequests = "네트워크 요청이 너무 자주 요청 되었습니다.\n나중에 다시 시도해 주세요"
-
+    //MARK: UserDefaults Key
+    static let cellKey = "cell"
 }

@@ -19,7 +19,16 @@ final class SearchCoinViewController: BaseViewController {
         super.viewDidLoad()
         bind()
     }
-        
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let index = U.shared.get(C.cellKey, -1)
+        if index != -1 {
+            collectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
+            U.shared.set(-1, C.cellKey)
+        }
+    }
+    
     override func configureHierarchy() {
         addSubView(collectionView)
     }
@@ -58,13 +67,20 @@ final class SearchCoinViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
-        collectionView.rx.modelSelected(SearchResult.self)
-            .bind(with: self, onNext: { owner, model in
-                let vc = CoinDetailViewController()
-                vc.id.accept(model.id)
-                owner.navigationController?.pushViewController(vc, animated: true)
-            })
-            .disposed(by: disposeBag)
+        Observable.zip(
+            collectionView.rx.modelSelected(SearchResult.self),
+            collectionView.rx.itemSelected
+        )
+        .bind(with: self) { owner, tuple in
+            let (model, indexPath) = tuple
+            
+            U.shared.set(indexPath.item, C.cellKey)
+            
+            let vc = CoinDetailViewController()
+            vc.id.accept(model.id)
+            owner.navigationController?.pushViewController(vc, animated: true)
+        }
+        .disposed(by: disposeBag)
     }
 }
 
